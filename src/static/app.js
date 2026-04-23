@@ -713,7 +713,7 @@ document.addEventListener("DOMContentLoaded", () => {
       .map(
         (item) => `
           <article class="announcement-card" role="status">
-            <p class="announcement-title"><strong>Announcement:</strong> ${escapeHtml(item.title || "Untitled")}</p>
+            <p class="announcement-title"><span class="announcement-title-icon" aria-hidden="true">📢</span><strong>Announcement:</strong> ${escapeHtml(item.title || "Untitled")}</p>
             <p class="announcement-message">${escapeHtml(item.message || "No message provided.")}</p>
           </article>
         `
