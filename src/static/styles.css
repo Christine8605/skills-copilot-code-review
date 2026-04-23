@@ -781,6 +781,13 @@ footer {
   font-weight: 800;
   color: var(--primary-dark);
   margin-bottom: 4px !important;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.announcement-title-icon {
+  line-height: 1;
 }
 
 .announcement-message {
