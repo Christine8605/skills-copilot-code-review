@@ -4,6 +4,20 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mergington High School Activities</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&family=Fraunces:opsz,wght@9..144,600&display=swap"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&family=Fraunces:opsz,wght@9..144,600&display=swap"
+      />
+    </noscript>
     <link rel="stylesheet" href="styles.css" />
     <link
       rel="icon"
@@ -12,9 +26,6 @@
     />
   </head>
   <body>
-    <div class="announcement-banner" role="alert" aria-live="assertive">
-      📢 Activity registration is open until the end of the month. Don't lose your spot!
-    </div>
     <header>
       <h1>Mergington High School</h1>
       <h2>Extracurricular Activities</h2>
@@ -26,10 +37,16 @@
           </button>
           <div id="user-info" class="hidden">
             <span id="display-name"></span>
+            <button id="manage-announcements-button" class="hidden" aria-haspopup="dialog">
+              Manage Announcements
+            </button>
             <button id="logout-button">Logout</button>
           </div>
         </div>
       </div>
+      <section id="announcements-container" aria-live="polite" aria-label="School announcements">
+        <p class="announcement-placeholder">Loading announcements...</p>
+      </section>
     </header>
 
     <main>
@@ -134,6 +151,57 @@
           <button type="submit">Login</button>
         </form>
         <div id="login-message" class="hidden message"></div>
+      </div>
+    </div>
+
+    <!-- Announcement Management Modal -->
+    <div id="announcement-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="announcement-modal-title">
+      <div class="modal-content announcement-modal-content">
+        <span class="close-announcement-modal" aria-label="Close announcement manager">&times;</span>
+        <h3 id="announcement-modal-title">Manage Announcements</h3>
+        <p class="announcement-manager-subtitle">
+          Add a new message, or update existing announcements for students and families.
+        </p>
+
+        <div id="announcement-modal-message" class="hidden message"></div>
+
+        <div class="announcement-manager-layout">
+          <section class="announcement-list-panel">
+            <h4>Current Announcements</h4>
+            <div id="announcement-list" class="announcement-list" aria-live="polite"></div>
+          </section>
+
+          <section class="announcement-form-panel">
+            <h4 id="announcement-form-title">Add Announcement</h4>
+            <form id="announcement-form">
+              <input type="hidden" id="announcement-id" value="" />
+              <div class="form-group">
+                <label for="announcement-title">Title</label>
+                <input type="text" id="announcement-title" maxlength="120" required />
+              </div>
+              <div class="form-group">
+                <label for="announcement-message">Message</label>
+                <textarea id="announcement-message" maxlength="500" required></textarea>
+              </div>
+              <div class="date-field-grid">
+                <div class="form-group">
+                  <label for="announcement-start-date">Start Date (optional)</label>
+                  <input type="date" id="announcement-start-date" />
+                </div>
+                <div class="form-group">
+                  <label for="announcement-expiration-date">Expiration Date</label>
+                  <input type="date" id="announcement-expiration-date" required />
+                </div>
+              </div>
+              <div class="announcement-form-actions">
+                <button type="button" id="announcement-cancel-edit" class="secondary-button hidden">
+                  Cancel Edit
+                </button>
+                <button type="submit" id="announcement-save-button">Save Announcement</button>
+              </div>
+            </form>
+          </section>
+        </div>
       </div>
     </div>
 
